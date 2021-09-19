@@ -39,7 +39,11 @@ const Recruit = () => {
   });
 
   return (
-    <Animated.View style={[styles.container, containerStyle]}>
+    <Animated.ScrollView
+      showsVerticalScrollIndicator={false}
+      contentContainerStyle={styles.container}
+      style={containerStyle}
+    >
       <Header>
         <SmallerTitle>MEET THE</SmallerTitle>
         <Title>CREW</Title>
@@ -57,13 +61,12 @@ const Recruit = () => {
         setCharacter={setCharacter}
       />
       <Button x={translateX} />
-    </Animated.View>
+    </Animated.ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     alignItems: 'center',
     justifyContent: 'space-between',
     paddingVertical: Spacing.xl,

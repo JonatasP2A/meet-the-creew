@@ -1,7 +1,7 @@
 import { Dimensions } from 'react-native';
 import styled from 'styled-components/native';
 import { Feather as F } from '@expo/vector-icons';
-import { Colors, Spacing } from '../../styles';
+import { Colors, Spacing, FontSize } from '../../styles';
 
 const { width } = Dimensions.get('window');
 
@@ -17,7 +17,7 @@ export const ButtonContainer = styled.TouchableOpacity`
 
 export const Text = styled.Text`
   color: ${Colors.white};
-  font-size: 16px;
+  font-size: ${FontSize.s}px;
   font-family: AirbnbCereal-Medium;
   text-decoration-line: underline;
 `;
