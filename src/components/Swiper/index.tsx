@@ -36,9 +36,14 @@ interface SwiperProps {
   x: Animated.SharedValue<number>;
   min: number;
   max: number;
+  setCharacter: (value: number) => void;
 }
 
-const Swiper = ({ x, min, max }: SwiperProps) => {
+const Swiper = ({ x, min, max, setCharacter }: SwiperProps) => {
+  const index = useCallback((position) => {
+    setCharacter(snapPoints.findIndex((point) => point === position));
+  }, []);
+
   const onGestureEvent = useAnimatedGestureHandler<
     PanGestureHandlerGestureEvent,
     {
@@ -54,6 +59,7 @@ const Swiper = ({ x, min, max }: SwiperProps) => {
     onEnd: ({ velocityX }) => {
       const dest = snapPoint(x.value, velocityX, snapPoints);
       x.value = withTiming(dest);
+      runOnJS(index)(dest);
     },
   });
   const style = useAnimatedStyle(() => {
@@ -70,6 +76,7 @@ const Swiper = ({ x, min, max }: SwiperProps) => {
 
   const onPress = (index: number) => {
     x.value = withTiming((index * (width - Spacing.xl * 2 + CIRCLE_WIDTH)) / 2);
+    setCharacter(index);
   };
 
   return (
